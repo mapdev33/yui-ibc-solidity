@@ -121,12 +121,12 @@ contract IBCHandler {
 
     function recvPacket(IBCMsgs.MsgPacketRecv calldata msg_) external returns (bytes memory acknowledgement) {
         IModuleCallbacks module = lookupModuleByChannel(msg_.packet.destination_port, msg_.packet.destination_channel);
-        revert("----recv packet 01");
+        //revert("----recv packet 01");
         acknowledgement = module.onRecvPacket(msg_.packet);
-        revert("----recv packet 02");
+        //revert("----recv packet 02");
         IBCChannel.recvPacket(host, msg_);
         if (acknowledgement.length > 0) {
-            revert("----recv packet 03");
+            //revert("----recv packet 03");
             IBCChannel.writeAcknowledgement(host, msg_.packet.destination_port, msg_.packet.destination_channel, msg_.packet.sequence, acknowledgement);
             emit WriteAcknowledgement(msg_.packet.destination_port, msg_.packet.destination_channel, msg_.packet.sequence, acknowledgement);
         }
