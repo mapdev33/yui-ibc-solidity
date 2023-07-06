@@ -75,6 +75,7 @@ contract IBCHandler {
     }
 
     function channelOpenTry(IBCMsgs.MsgChannelOpenTry memory msg_) public returns (string memory) {
+        revert("----channelOpenTry 01");
         string memory channelId = IBCChannel.channelOpenTry(host, msg_);
         IModuleCallbacks module = lookupModuleByPortId(msg_.portId);
         module.onChanOpenTry(
